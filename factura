@@ -1,0 +1,189 @@
+deber
+=====
+<!DOCTYPE html>
+
+<html >
+<head> 
+<title>Sistema de Facturacion</title>
+</head>
+
+<body text = "white" background ="assassins creed ac brotherhood logo trademark symbol wallpaper background ubisoft action.jpg">
+<br><br><br><br><br><br><br>
+	<br><center><h2></h2></center><br>
+<div id="muestra">
+<CENTER><H2>FACTURACION<H2><CENTER></P>
+<center>
+<input type="BUTTON" value="Agregar producto" onClick="anidar()">
+<input type="button" value="Imprimir" onclick="javascript:window.print()" />
+<input type="button" value="eliminar" onClick="borrar()"/>
+
+<table border="0px">
+<tr><td>Cedula Cliente</td>
+<td><input type="text"></td></tr>	
+<tr><td>Nombre Cliente</td>
+<td><input type="text"></td></tr>
+
+
+<tr>
+	<td><center>Codigo</center></td>
+	<td><center>Descripcion</center></td>
+	<td><center>Valor unitario</center></td>
+	<td><center>Cantidad</center></td>
+	<td><center>Subtotal</center></td>
+</tr>
+
+<tr>
+	<td> <input type="text" id="cod1"> </td>
+	<td> <input type="text"id="des1"> </td>
+	<td> <input type="text" id="val1" onChange="calcular(val1.value, cant1.value, sub1.id)"></td>
+	<td> <input type="text" id="cant1" onChange="calcular(val1.value, cant1.value, sub1.id)"></td>
+	<td> <input type="text" id="sub1" value="0" readonly="true" ></td>
+</tr>
+</table>
+
+<tr>
+	<div id="celdasFactura" style="">
+	</div>
+</tr>
+
+<table border="0px">
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td><center>Subtotal</center> </td>
+	<td> <input type="text" id="cajasubtotal"></td>
+</tr>
+
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td><center>Iva 12 %</center></td>
+	<td> <input type="text" id="cajaiva"></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td><center>Valor Total</center></td>
+	<td> <input type="text" id="cajatotal"></td>
+</tr>
+</table>
+
+<button onClick="totalFactura()">CALCULAR TOTAL DE FACTURA</button>
+</center>
+<div>
++
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+
+
+
+var sub = 0;
+var multi = 0;
+var iva = 0;
+var vtotal = 0;
+var s = 0;
+
+var acu = 1;
+var celdas="";
+
+
+function anidar(){
+
+acu = acu+1;
+
+c1 = "<tr><td> <input type='text' id='cod"+acu+"'> </td><td> <input type='text' id='des"+acu+"'> </td>";
+c2 = "<td> <input type='text' id='val"+acu+"' onChange='calcular(val"+acu+".value, cant"+acu+".value, sub"+acu+".id)'></td>";
+c3 = "<td> <input type='text' id='cant"+acu+"' onChange='calcular(val"+acu+".value, cant"+acu+".value, sub"+acu+".id)'></td>";
+c4 = "<td> <input type='text' id='sub"+acu+"' value='0'></td></tr><br id='esp"+acu+"'>";
+
+	
+	celdas = c1+c2+c3+c4;
+document.getElementById("celdasFactura").innerHTML += celdas;
+
+return acu;
+
+}
+	
+function borrar(){
+alert("esta eliminando el ultimo campo")
+//celdas = c1-c2-c3-c4;
+
+document.getElementById("cod"+acu+"").outerHTML = "";
+document.getElementById("des"+acu+"").outerHTML = "";
+document.getElementById("val"+acu+"").outerHTML = "";
+document.getElementById("cant"+acu+"").outerHTML = "";
+document.getElementById("sub"+acu+"").outerHTML = "";
+document.getElementById("esp"+acu+"").outerHTML = "";
+acu = acu - 1;
+
+}	
+	
+	
+	
+function calcular(val, cant, subto) {
+
+
+
+	//var num=val
+	//alert(num);
+    if (isNaN(val)){
+		alert("SOLO NUMEROS");
+		document.getElementById("val"+acu+"").value = "" ;
+		//alert(acu);
+		
+		
+	}else{
+	multi = (val * cant); 
+	document.getElementById(subto).value = multi;
+	}
+	if(isNaN(cant)){
+		alert("SOLO NUMEROS");
+		document.getElementById("cant"+acu+"").value = "" ;
+		//alert(acu);
+	}else{
+	multi = (val * cant); 
+	document.getElementById(subto).value = multi;
+	}
+}
+
+function totalFactura () {
+	alert(acu);
+var sub = 0;
+
+for( var i=1; i<=acu; i++){
+	s = document.getElementById('sub'+i+'').value;
+	s = parseInt(s);
+	sub += s;
+	
+
+	document.getElementById("cajasubtotal").value = sub;
+ 
+ 	iva = (sub *12)/100;
+	document.getElementById("cajaiva").value = iva;
+
+	vtotal = sub + iva ;
+	document.getElementById("cajatotal").value = vtotal;
+	};
+}
+
+
+
+
+
+	
+	
+
+
+</script>
+
+<function imprSelec(muestra)
+{var ficha=document.getElementById(muestra);var ventimp=window.open(' ','popimpr');ventimp.document.write(ficha.innerHTML);ventimp.document.close();ventimp.print();ventimp.close();};" />
+
+
